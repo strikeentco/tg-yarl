@@ -2,26 +2,26 @@ tg-yarl
 ==========
 [![license](https://img.shields.io/github/license/strikeentco/tg-yarl.svg)](https://github.com/strikeentco/tg-yarl/blob/master/LICENSE) [![node](https://img.shields.io/node/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl) [![npm](https://img.shields.io/npm/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl) [![bitHound Score](https://www.bithound.io/github/strikeentco/tg-yarl/badges/score.svg)](https://www.bithound.io/github/strikeentco/tg-yarl)
 
-A simple `Promise` based wrapper over Telegram Bot Api with additional features.
+A simple `Promise` based wrapper over Telegram Bot API with additional features.
 
 ```sh
 npm install tg-yarl
 ```
 
 ```js
-const Api = require('tg-yarl')('YOUR_TELEGRAM_BOT_TOKEN');
+const api = require('tg-yarl')('YOUR_TELEGRAM_BOT_TOKEN');
 
-Api.setWebhook('https://example.com/bot', './certificate.pem');
-Api.getMe().then(res => console.log(res.body));
+api.setWebhook('https://example.com/bot', './certificate.pem');
+api.getMe().then(res => console.log(res.body));
 
-Api
+api
   .sendPhoto('chatId', './anonim.jpg', {caption: 'Anonymous'})
   .then(res => console.log(res.body));
 ```
 
 # [Methods](https://core.telegram.org/bots/api)
 
-All methods return a `Promise`, unless otherwise indicated.
+All methods return a `Promise`.
 
 ## [getMe()](https://core.telegram.org/bots/api#getme)
 
@@ -210,7 +210,7 @@ Download file to specified path.
 * **path** (*String|WritableStream*) - File will be written to specified `WritableStream` or new `WritableStream` will be created with specified path.
 
 ```js
-Api.downloadFile('AgADAgADjagxGxAR6gbMzfh8LDtkU-9GhCoABOmH973MjLOBq7sAAgI', './file.jpg');
+api.downloadFile('AgADAgADjagxGxAR6gbMzfh8LDtkU-9GhCoABOmH973MjLOBq7sAAgI', './file.jpg');
 ```
 
 ## setKeyboard(keyboard, [resize], [once], [selective])
@@ -230,17 +230,17 @@ Custom keyboard.
 
 If you just want to hide the keyboard, then do this:
 ```js
-Api.setKeyboard().sendMessage('chatId', 'Text');
+api.setKeyboard().sendMessage('chatId', 'Text');
 //or
-Api.setKeyboard(true);
-Api.sendMessage('chatId', 'Text');
+api.setKeyboard(true);
+api.sendMessage('chatId', 'Text');
 ```
 If you want to hide the keyboard to specific users only, then do this:
 ```js
-Api.setKeyboard(true, true).sendMessage('chatId', 'Text');
+api.setKeyboard(true, true).sendMessage('chatId', 'Text');
 //or
-Api.setKeyboard(true, true);
-Api.sendMessage('chatId', 'Text');
+api.setKeyboard(true, true);
+api.sendMessage('chatId', 'Text');
 ```
 
 ### Params:
@@ -262,7 +262,7 @@ var inputFile = new Buffer(); //Buffer
 //or
 var inputFile = require('fs').createReadStream('./file.png'); //local Stream
 
-Api.sendPhoto('chatId', inputFile);
+api.sendPhoto('chatId', inputFile);
 ```
 
 For remote `Stream`:
@@ -272,7 +272,7 @@ var inputFile = {
   filename: 'image.jpg'
 };
 
-Api.sendPhoto('chatId', inputFile);
+api.sendPhoto('chatId', inputFile);
 ```
 
 ## License
