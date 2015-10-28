@@ -9,9 +9,9 @@ npm install --save tg-yarl
 ```
 
 ```js
-const TgYarl = require('tg-yarl');
+const BotApi = require('tg-yarl');
 
-const api = new TgYarl('YOUR_TELEGRAM_BOT_TOKEN');
+const api = new BotApi('YOUR_TELEGRAM_BOT_TOKEN');
 
 api.setWebhook('https://example.com/bot', './certificate.pem');
 
