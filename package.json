@@ -1,0 +1,30 @@
+{
+  "name": "tg-yarl",
+  "author": "Alexey Bystrov <strikeentco@gmail.com>",
+  "version": "1.0.0",
+  "description": "A simple Promise based wrapper over Telegram Bot Api with additional features.",
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "api",
+    "teabot",
+    "bot api",
+    "wrapper",
+    "yarl"
+  ],
+  "main": "./main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strikeentco/tg-yarl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/strikeentco/tg-yarl/issues"
+  },
+  "dependencies": {
+    "yarl": "^1.0.0"
+  },
+  "license": "MIT"
+}
