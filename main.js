@@ -163,14 +163,14 @@ Api.prototype.sendVideo = function(chatId, data, options) {
 Api.prototype.sendVoice = function(chatId, data, options) {
   options || (options = {});
   options.chat_id = chatId;
-  options.audio = fileLoad(data);
+  options.voice = fileLoad(data);
 
   if (this.keyboard) {
     options.reply_markup = this.keyboard;
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendVideo', {body: options, json: true, multipart: true});
+  return yarl.post(this.url + 'sendVoice', {body: options, json: true, multipart: true});
 };
 
 Api.prototype.sendLocation = function(chatId, lat, lon, options) {
