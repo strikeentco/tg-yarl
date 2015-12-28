@@ -1,7 +1,7 @@
 {
   "name": "tg-yarl",
   "author": "Alexey Bystrov <strikeentco@gmail.com>",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple Promise based wrapper over Telegram Bot Api with additional features.",
   "engines": {
     "node": ">=0.12.0"
