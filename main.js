@@ -53,7 +53,7 @@ Api.prototype.setKeyboard = function(keyboard, resize, once, selective) {
 };
 
 Api.prototype.getUpdates = function(offset, limit, timeout) {
-  return yarl.get(this.url + 'setWebhook', {query: {
+  return yarl.get(this.url + 'getUpdates', {query: {
     offset: offset,
     limit: limit,
     timeout: timeout
@@ -210,6 +210,14 @@ Api.prototype.downloadFile = function(fileId, path) {
   return this.getFile(fileId).then(function(res) {
     return yarl.download(this.fileUrl + res.body.result.file_path, path);
   }.bind(this));
+};
+
+Api.prototype.answerInlineQuery = function(queryId, results, options) {
+  options || (options = {});
+  options.inline_query_id = queryId;
+  options.results = results;
+
+  return yarl.post(this.url + 'answerInlineQuery', {body: options, json: true});
 };
 
 module.exports = Api;
