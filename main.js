@@ -215,7 +215,7 @@ Api.prototype.downloadFile = function(fileId, path) {
 Api.prototype.answerInlineQuery = function(queryId, results, options) {
   options || (options = {});
   options.inline_query_id = queryId;
-  options.results = results;
+  options.results = JSON.stringify(results);
 
   return yarl.post(this.url + 'answerInlineQuery', {body: options, json: true});
 };

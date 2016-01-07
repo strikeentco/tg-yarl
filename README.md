@@ -38,15 +38,15 @@ To use a self-signed certificate, you need to upload your public key certificate
 * **[url]** (*String*) - HTTPS url to send updates to. Use an empty string to remove webhook integration.
 * **[certificate]** (*String|Object*) - Object with file path, Stream or Buffer. See [InputFile object](#inputfile-object) for more info.
 
-## [getUpdates([timeout], [limit], [offset])](https://core.telegram.org/bots/api#getupdates)
+## [getUpdates([offset], [limit], [timeout])](https://core.telegram.org/bots/api#getupdates)
 
 Use this method to receive incoming updates using long polling.
 
 ### Params:
 
-* **timeout** (*Integer*) - Timeout in seconds for long polling.
-* **limit** (*Integer*) - Limits the number of updates to be retrieved.
 * **offset** (*Integer*) - Identifier of the first update to be returned.
+* **limit** (*Integer*) - Limits the number of updates to be retrieved.
+* **timeout** (*Integer*) - Timeout in seconds for long polling.
 
 ## [sendMessage(chatId, text, [options])](https://core.telegram.org/bots/api#sendmessage)
 
@@ -292,4 +292,4 @@ api.sendPhoto('chatId', inputFile);
 ## License
 
 The MIT License (MIT)<br/>
-Copyright (c) 2015 Alexey Bystrov
+Copyright (c) 2015-2016 Alexey Bystrov
