@@ -13,7 +13,7 @@ function fileLoad(path) {
       return path;
     }
   } else if (typeof path === 'object' && path.value && path.filename) {
-    return {value: path.value, options: {filename: path.filename}};
+    return { value: path.value, options: { filename: path.filename } };
   }
 
   return path;
@@ -33,7 +33,7 @@ function Api(token) {
   this.fileUrl = url + '/file/bot' + this.token + '/';
 }
 
-Api.prototype.setKeyboard = function(keyboard, resize, once, selective) {
+Api.prototype.setKeyboard = function (keyboard, resize, once, selective) {
   if (!Array.isArray(keyboard)) {
     this.keyboard = {
       hide_keyboard: true,
@@ -52,16 +52,16 @@ Api.prototype.setKeyboard = function(keyboard, resize, once, selective) {
   return this;
 };
 
-Api.prototype.getUpdates = function(offset, limit, timeout) {
-  return yarl.get(this.url + 'getUpdates', {query: {
+Api.prototype.getUpdates = function (offset, limit, timeout) {
+  return yarl.get(this.url + 'getUpdates', { query: {
     offset: offset,
     limit: limit,
     timeout: timeout
-  }, json: true});
+  }, json: true });
 };
 
-Api.prototype.setWebhook = function(url, cert) {
-  var options = {body: {url: url}, json: true};
+Api.prototype.setWebhook = function (url, cert) {
+  var options = { body: { url: url }, json: true };
   if (cert) {
     options.body.certificate = fileLoad(cert);
     options.multipart = true;
@@ -70,11 +70,11 @@ Api.prototype.setWebhook = function(url, cert) {
   return yarl.post(this.url + 'setWebhook', options);
 };
 
-Api.prototype.getMe = function() {
-  return yarl.get(this.url + 'getMe', {json: true});
+Api.prototype.getMe = function () {
+  return yarl.get(this.url + 'getMe', { json: true });
 };
 
-Api.prototype.sendMessage = function(chatId, text, options) {
+Api.prototype.sendMessage = function (chatId, text, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.text = text;
@@ -84,18 +84,19 @@ Api.prototype.sendMessage = function(chatId, text, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendMessage', {body: options, json: true});
+  return yarl.post(this.url + 'sendMessage', { body: options, json: true });
 };
 
-Api.prototype.forwardMessage = function(chatId, fromChatId, messageId) {
-  return yarl.post(this.url + 'forwardMessage', {body: {
+Api.prototype.forwardMessage = function (chatId, fromChatId, messageId, disableNotification) {
+  return yarl.post(this.url + 'forwardMessage', { body: {
     chat_id: chatId,
     from_chat_id: fromChatId,
-    message_id: messageId
-  }, json: true});
+    message_id: messageId,
+    disable_notification: disableNotification
+  }, json: true });
 };
 
-Api.prototype.sendPhoto = function(chatId, data, options) {
+Api.prototype.sendPhoto = function (chatId, data, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.photo = fileLoad(data);
@@ -105,10 +106,10 @@ Api.prototype.sendPhoto = function(chatId, data, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendPhoto', {body: options, json: true, multipart: true});
+  return yarl.post(this.url + 'sendPhoto', { body: options, json: true, multipart: true });
 };
 
-Api.prototype.sendAudio = function(chatId, data, options) {
+Api.prototype.sendAudio = function (chatId, data, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.audio = fileLoad(data);
@@ -118,10 +119,10 @@ Api.prototype.sendAudio = function(chatId, data, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendAudio', {body: options, json: true, multipart: true});
+  return yarl.post(this.url + 'sendAudio', { body: options, json: true, multipart: true });
 };
 
-Api.prototype.sendDocument = function(chatId, data, options) {
+Api.prototype.sendDocument = function (chatId, data, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.document = fileLoad(data);
@@ -131,10 +132,10 @@ Api.prototype.sendDocument = function(chatId, data, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendDocument', {body: options, json: true, multipart: true});
+  return yarl.post(this.url + 'sendDocument', { body: options, json: true, multipart: true });
 };
 
-Api.prototype.sendSticker = function(chatId, data, options) {
+Api.prototype.sendSticker = function (chatId, data, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.sticker = fileLoad(data);
@@ -144,10 +145,10 @@ Api.prototype.sendSticker = function(chatId, data, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendSticker', {body: options, json: true, multipart: true});
+  return yarl.post(this.url + 'sendSticker', { body: options, json: true, multipart: true });
 };
 
-Api.prototype.sendVideo = function(chatId, data, options) {
+Api.prototype.sendVideo = function (chatId, data, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.video = fileLoad(data);
@@ -157,10 +158,10 @@ Api.prototype.sendVideo = function(chatId, data, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendVideo', {body: options, json: true, multipart: true});
+  return yarl.post(this.url + 'sendVideo', { body: options, json: true, multipart: true });
 };
 
-Api.prototype.sendVoice = function(chatId, data, options) {
+Api.prototype.sendVoice = function (chatId, data, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.voice = fileLoad(data);
@@ -170,10 +171,10 @@ Api.prototype.sendVoice = function(chatId, data, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendVoice', {body: options, json: true, multipart: true});
+  return yarl.post(this.url + 'sendVoice', { body: options, json: true, multipart: true });
 };
 
-Api.prototype.sendLocation = function(chatId, lat, lon, options) {
+Api.prototype.sendLocation = function (chatId, lat, lon, options) {
   options || (options = {});
   options.chat_id = chatId;
   options.latitude = lat;
@@ -184,40 +185,40 @@ Api.prototype.sendLocation = function(chatId, lat, lon, options) {
     delete this.keyboard;
   }
 
-  return yarl.post(this.url + 'sendLocation', {body: options, json: true});
+  return yarl.post(this.url + 'sendLocation', { body: options, json: true });
 };
 
-Api.prototype.sendChatAction = function(chatId, action) {
-  return yarl.post(this.url + 'sendChatAction', {body: {
+Api.prototype.sendChatAction = function (chatId, action) {
+  return yarl.post(this.url + 'sendChatAction', { body: {
     chat_id: chatId,
     action: action
-  }, json: true});
+  }, json: true });
 };
 
-Api.prototype.getUserProfilePhotos = function(userId, offset, limit) {
-  return yarl.get(this.url + 'getUserProfilePhotos', {query: {
+Api.prototype.getUserProfilePhotos = function (userId, offset, limit) {
+  return yarl.get(this.url + 'getUserProfilePhotos', { query: {
     user_id: userId,
     offset: offset,
     limit: limit
-  }, json: true});
+  }, json: true });
 };
 
-Api.prototype.getFile = function(fileId) {
-  return yarl.get(this.url + 'getFile', {query: {file_id: fileId}, json: true});
+Api.prototype.getFile = function (fileId) {
+  return yarl.get(this.url + 'getFile', { query: { file_id: fileId }, json: true });
 };
 
-Api.prototype.downloadFile = function(fileId, path) {
-  return this.getFile(fileId).then(function(res) {
+Api.prototype.downloadFile = function (fileId, path) {
+  return this.getFile(fileId).then(function (res) {
     return yarl.download(this.fileUrl + res.body.result.file_path, path);
   }.bind(this));
 };
 
-Api.prototype.answerInlineQuery = function(queryId, results, options) {
+Api.prototype.answerInlineQuery = function (queryId, results, options) {
   options || (options = {});
   options.inline_query_id = queryId;
   options.results = JSON.stringify(results);
 
-  return yarl.post(this.url + 'answerInlineQuery', {body: options, json: true});
+  return yarl.post(this.url + 'answerInlineQuery', { body: options, json: true });
 };
 
 module.exports = Api;

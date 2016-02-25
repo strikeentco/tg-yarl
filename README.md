@@ -5,7 +5,7 @@ tg-yarl
 A simple `Promise` based wrapper over Telegram Bot API with additional features.
 
 ```sh
-npm install tg-yarl
+$ npm install tg-yarl --save
 ```
 
 ```js
@@ -59,10 +59,11 @@ Send text message.
 * **[options]** (*Object*) - Message options:
   * **parse_mode** (*String*) - Send `Markdown`, if you want Telegram apps to show [bold, italic and inline URLs](https://core.telegram.org/bots/api#using-markdown) in your bot's message.
   * **disable_web_page_preview** (*Boolean*) - Disables link previews for links in this message.
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
-## [forwardMessage(chatId, fromChatId, messageId)](https://core.telegram.org/bots/api#forwardmessage)
+## [forwardMessage(chatId, fromChatId, messageId, disableNotification)](https://core.telegram.org/bots/api#forwardmessage)
 
 Forward messages of any kind.
 
@@ -71,6 +72,7 @@ Forward messages of any kind.
 * **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
 * **fromChatId** (*Integer|String*) - Unique identifier for the chat where the original message was sent (or channel username in the format `@channelusername`)
 * **messageId** (*Integer*) - Unique message identifier.
+* **[disable_notification]** (*Boolean*) - Sends the message silently.
 
 ## [sendPhoto(chatId, photo, [options])](https://core.telegram.org/bots/api#sendphoto)
 
@@ -81,7 +83,8 @@ Send photo.
 * **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
 * **photo** (*String|Object*) - Object with file path, Stream, Buffer or `file_id`. See [InputFile object](#inputfile-object) for more info.
 * **[options]** (*Object*) - Photo options:
-  * **caption** (*String*) - Photo caption.
+  * **caption** (*String*) - Photo caption (may also be used when resending photos by file_id), 0-200 characters.
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
@@ -98,6 +101,7 @@ Send audio.
   * **duration** (*Integer*) - Duration of sent audio in seconds.
   * **performer** (*String*) - Performer of sent audio.
   * **title** (*String*) - Title of sent audio.
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
@@ -111,6 +115,8 @@ Send document.
 * **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
 * **document** (*String|Object*) - Object with file path, Stream, Buffer or `file_id`. See [InputFile object](#inputfile-object) for more info.
 * **[options]** (*Object*) - Document options:
+  * **caption** (*String*) - Document caption (may also be used when resending documents by file_id), 0-200 characters.
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
@@ -124,6 +130,7 @@ Send .webp stickers.
 * **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
 * **sticker** (*String|Object*) - Object with file path, Stream, Buffer or `file_id`. See [InputFile object](#inputfile-object) for more info.
 * **[options]** (*Object*) - Sticker options:
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
@@ -138,7 +145,10 @@ Send video.
 * **video** (*String|Object*) - Object with file path, Stream, Buffer or `file_id`. See [InputFile object](#inputfile-object) for more info.
 * **[options]** (*Object*) - Video options:
   * **duration** (*Integer*) - Duration of sent video in seconds.
-  * **caption** (*String*) - Video caption.
+  * **width** (*Integer*) - Video width.
+  * **height** (*Integer*) - Video height.
+  * **caption** (*String*) - Video caption (may also be used when resending videos by file_id), 0-200 characters
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
@@ -152,7 +162,8 @@ Send voice.
 * **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
 * **voice** (*String|Object*) - Object with file path, Stream, Buffer or `file_id`. See [InputFile object](#inputfile-object) for more info.
 * **[options]** (*Object*) - Voice options:
-  * **duration** (*Integer*) - Duration of sent video in seconds.
+  * **duration** (*Integer*) - Duration of sent audio in seconds.
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
@@ -166,6 +177,7 @@ Send location.
 * **latitude** (*Float*) - Latitude of location.
 * **longitude** (*Float*) - Longitude of location.
 * **[options]** (*Object*) - Location options:
+  * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
@@ -220,7 +232,7 @@ Download file to specified path.
 
 ### Params:
 
-* **file_id** (*String*) - File identifier to get info about.
+* **file_id** (*String*) - File identifier to download.
 * **path** (*String|WritableStream*) - File will be written to specified `WritableStream` or new `WritableStream` will be created with specified path.
 
 ```js
