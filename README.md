@@ -1,6 +1,6 @@
-tg-yarl
+tg-yarl  [![License](https://img.shields.io/github/license/strikeentco/tg-yarl.svg)](https://github.com/strikeentco/tg-yarl/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl)
 ==========
-[![license](https://img.shields.io/github/license/strikeentco/tg-yarl.svg)](https://github.com/strikeentco/tg-yarl/blob/master/LICENSE) [![node](https://img.shields.io/node/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl) [![npm](https://img.shields.io/npm/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl) [![bitHound Score](https://www.bithound.io/github/strikeentco/tg-yarl/badges/score.svg)](https://www.bithound.io/github/strikeentco/tg-yarl)
+[![Build Status](https://travis-ci.org/strikeentco/tg-yarl.svg)](https://travis-ci.org/strikeentco/tg-yarl) [![node](https://img.shields.io/node/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl) [![Test Coverage](https://codeclimate.com/github/strikeentco/tg-yarl/badges/coverage.svg)](https://codeclimate.com/github/strikeentco/tg-yarl/coverage) [![bitHound Score](https://www.bithound.io/github/strikeentco/tg-yarl/badges/score.svg)](https://www.bithound.io/github/strikeentco/tg-yarl)
 
 A simple `Promise` based wrapper over Telegram Bot API with additional features.
 
@@ -16,7 +16,11 @@ api.getMe().then(res => console.log(res.body));
 
 api
   .sendPhoto('chatId', './anonim.jpg', {caption: 'Anonymous'})
-  .then(res => console.log(res.body));
+  .then(console.log);
+
+api
+  .sendDocumentFromUrl('chatId', 'https://24.media.tumblr.com/688ab090ba729bcd31d4e6f6c208f15c/tumblr_mws1kwdCds1r9hliho1_500.gif'})
+  .then(console.log);
 ```
 
 # [Methods](https://core.telegram.org/bots/api)
@@ -63,7 +67,7 @@ Send text message.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
-## [forwardMessage(chatId, fromChatId, messageId, disableNotification)](https://core.telegram.org/bots/api#forwardmessage)
+## [forwardMessage(chatId, fromChatId, messageId, [disableNotification])](https://core.telegram.org/bots/api#forwardmessage)
 
 Forward messages of any kind.
 
@@ -72,7 +76,7 @@ Forward messages of any kind.
 * **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
 * **fromChatId** (*Integer|String*) - Unique identifier for the chat where the original message was sent (or channel username in the format `@channelusername`)
 * **messageId** (*Integer*) - Unique message identifier.
-* **[disable_notification]** (*Boolean*) - Sends the message silently.
+* **[disableNotification]** (*Boolean*) - Sends the message silently.
 
 ## [sendPhoto(chatId, photo, [options])](https://core.telegram.org/bots/api#sendphoto)
 
@@ -87,7 +91,6 @@ Send photo.
   * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
-
 
 ## [sendAudio(chatId, audio, [options])](https://core.telegram.org/bots/api#sendaudio)
 
@@ -105,7 +108,6 @@ Send audio.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
-
 ## [sendDocument(chatId, document, [options])](https://core.telegram.org/bots/api#sendDocument)
 
 Send document.
@@ -120,7 +122,6 @@ Send document.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
-
 ## [sendSticker(chatId, sticker, [options])](https://core.telegram.org/bots/api#sendsticker)
 
 Send .webp stickers.
@@ -133,7 +134,6 @@ Send .webp stickers.
   * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
-
 
 ## [sendVideo(chatId, video, [options])](https://core.telegram.org/bots/api#sendvideo)
 
@@ -151,7 +151,6 @@ Send video.
   * **disable_notification** (*Boolean*) - Sends the message silently.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
-
 
 ## [sendVoice(chatId, voice, [options])](https://core.telegram.org/bots/api#sendvoice)
 
@@ -226,6 +225,66 @@ No more than 50 results per query are allowed.
 
 # Extra
 
+## sendPhotoFromUrl(chatId, url, [options])
+
+Send photo from URL.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **url** (*String*) - String with URL.
+* **[options]** (*Object*) - Photo options.
+
+## sendAudioFromUrl(chatId, url, [options])
+
+Send audio from URL.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **url** (*String*) - String with URL.
+* **[options]** (*Object*) - Audio options.
+
+## sendDocumentFromUrl(chatId, url, [options])
+
+Send document from URL.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **url** (*String*) - String with URL.
+* **[options]** (*Object*) - Document options.
+
+## sendStickerFromUrl(chatId, url, [options])
+
+Send .webp stickers from URL.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **url** (*String*) - String with URL.
+* **[options]** (*Object*) - Sticker options.
+
+## sendVideoFromUrl(chatId, url, [options])
+
+Send video from URL.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **url** (*String*) - String with URL.
+* **[options]** (*Object*) - Video options.
+
+## sendVoiceFromUrl(chatId, url, [options])
+
+Send voice from URL.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **url** (*String*) - String with URL.
+* **[options]** (*Object*) - Voice options.
+
 ## downloadFile(file_id, path)
 
 Download file to specified path.
@@ -252,26 +311,25 @@ Custom keyboard.
 
 **Note:** This method is chainable.
 
-## setKeyboard([hide_keyboard], [selective])
+## hideKeyboard([selective])
 
 If you just want to hide the keyboard, then do this:
 ```js
-api.setKeyboard().sendMessage('chatId', 'Text');
+api.hideKeyboard().sendMessage('chatId', 'Text');
 //or
-api.setKeyboard(true);
+api.hideKeyboard();
 api.sendMessage('chatId', 'Text');
 ```
 If you want to hide the keyboard to specific users only, then do this:
 ```js
-api.setKeyboard(true, true).sendMessage('chatId', 'Text');
+api.hideKeyboard(true).sendMessage('chatId', 'Text');
 //or
-api.setKeyboard(true, true);
+api.hideKeyboard(true);
 api.sendMessage('chatId', 'Text');
 ```
 
 ### Params:
 
-* **[hide_keyboard]** (*True*)- Requests clients to hide the custom keyboard.
 * **[selective]** (*Boolean*) - Use this parameter if you want to show the keyboard to specific users only.
 
 **Note:** This method is chainable.
