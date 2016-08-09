@@ -1,4 +1,4 @@
-tg-yarl  [![License](https://img.shields.io/github/license/strikeentco/tg-yarl.svg)](https://github.com/strikeentco/tg-yarl/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl)
+tg-yarl  [![License](https://img.shields.io/npm/l/tg-yarl.svg)](https://github.com/strikeentco/tg-yarl/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl)
 ==========
 [![Build Status](https://travis-ci.org/strikeentco/tg-yarl.svg)](https://travis-ci.org/strikeentco/tg-yarl) [![node](https://img.shields.io/node/v/tg-yarl.svg)](https://www.npmjs.com/package/tg-yarl) [![Test Coverage](https://codeclimate.com/github/strikeentco/tg-yarl/badges/coverage.svg)](https://codeclimate.com/github/strikeentco/tg-yarl/coverage) [![bitHound Score](https://www.bithound.io/github/strikeentco/tg-yarl/badges/score.svg)](https://www.bithound.io/github/strikeentco/tg-yarl)
 
@@ -15,7 +15,7 @@ api.setWebhook('https://example.com/bot', './certificate.pem');
 api.getMe().then(res => console.log(res.body));
 
 api
-  .sendPhoto('chatId', './anonim.jpg', {caption: 'Anonymous'})
+  .sendPhoto('chatId', './anonim.jpg', { caption: 'Anonymous' })
   .then(console.log);
 
 api
@@ -180,6 +180,38 @@ Send location.
   * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
   * **reply_markup** - Additional interface options.
 
+## [sendVenue(chatId, latitude, longitude, title, address, [options])](https://core.telegram.org/bots/api#sendvenue)
+
+Send venue.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **latitude** (*Float*) - Latitude of the venue.
+* **longitude** (*Float*) - Longitude of the venue.
+* **title** (*String*) - Name of the venue.
+* **address** (*String*) - Address of the venue.
+* **[options]** (*Object*) - Venue options:
+  * **foursquare_id** (*String*) - Foursquare identifier of the venue.
+  * **disable_notification** (*Boolean*) - Sends the message silently.
+  * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
+  * **reply_markup** - Additional interface options.
+
+## [sendContact(chatId, phoneNumber, firstName, [options])](https://core.telegram.org/bots/api#sendcontact)
+
+Send contact.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **phoneNumber** (*String*) - Contact's phone number.
+* **firstName** (*String*) - Contact's first name.
+* **[options]** (*Object*) - Contact options:
+  * **last_name** (*String*) - Contact's last name.
+  * **disable_notification** (*Boolean*) - Sends the message silently.
+  * **reply_to_message_id** (*Integer*) - If the message is a reply, ID of the original message.
+  * **reply_markup** - Additional interface options.
+
 ## [sendChatAction(chatId, action)](https://core.telegram.org/bots/api#sendchataction)
 
 Send chat action.
@@ -209,6 +241,128 @@ Use this method to get basic info about a file and prepare it for downloading.
 
 * **file_id** (*String*) - File identifier to get info about.
 
+## [kickChatMember(chatId, userId)](https://core.telegram.org/bots/api#kickchatmember)
+
+Kick chat member.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **userId** (*Integer*) - Unique identifier of the target user.
+
+## [leaveChat(chatId)](https://core.telegram.org/bots/api#leavechat)
+
+Use this method for your bot to leave a group, supergroup or channel.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+
+## [unbanChatMember(chatId, userId)](https://core.telegram.org/bots/api#unbanchatmember)
+
+Unban chat member.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **userId** (*Integer*) - Unique identifier of the target user.
+
+## [getChat(chatId)](https://core.telegram.org/bots/api#getchat)
+
+Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.).
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+
+## [getChatAdministrators(chatId)](https://core.telegram.org/bots/api#getchatadministrators)
+
+Use this method to get a list of administrators in a chat.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+
+## [getChatMembersCount(chatId)](https://core.telegram.org/bots/api#getchatmemberscount)
+
+Use this method to get the number of members in a chat.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+
+## [getChatMember(chatId, userId)](https://core.telegram.org/bots/api#getchatmember)
+
+Use this method to get information about a member of a chat.
+
+### Params:
+
+* **chatId** (*Integer|String*) - Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+* **userId** (*Integer*) - Unique identifier of the target user
+
+## [answerCallbackQuery(callbackQueryId, [options])](https://core.telegram.org/bots/api#answercallbackquery)
+
+Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
+
+### Params:
+
+* **callbackQueryId** (*String*) - Unique identifier for the query to be answered
+* **[options]** (*Object*) - Callback Query options:
+  * **text** (*String*) - Text of the notification. If not specified, nothing will be shown to the user.
+  * **show_alert** (*Boolean*) - If `true`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to `false`.
+
+# [Updating messages](https://core.telegram.org/bots/api#updating-messages)
+
+The following methods allow you to change an existing message in the message history instead of sending a new one with a result of an action. This is most useful for messages with inline keyboards using callback queries, but can also help reduce clutter in conversations with regular chat bots.
+
+Please note, that it is currently only possible to edit messages without `reply_markup` or with inline keyboards.
+
+## [editMessageText(text, options)](https://core.telegram.org/bots/api#editmessagetext)
+
+Use this method to edit text messages sent by the bot or via the bot (for inline bots).
+
+### Params:
+
+* **text** (*String*) - New text of the message.
+* **options** (*Object*) - Message options:
+  * **chat_id** (*Integer|String*) - Required if `inline_message_id` is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
+  * **message_id** (*Integer*) - Required if `inline_message_id` is not specified. Unique identifier of the sent message.
+  * **inline_message_id** (*Integer*) - Required if `chat_id` and `message_id` are not specified. Identifier of the inline message.
+  * **[parse_mode]** (*String*) - Send `Markdown`, if you want Telegram apps to show [bold, italic and inline URLs](https://core.telegram.org/bots/api#using-markdown) in your bot's message.
+  * **[disable_web_page_preview]** (*Boolean*) - Disables link previews for links in this message.
+  * **[reply_markup]** - Additional interface options.
+
+## [editMessageCaption(options)](https://core.telegram.org/bots/api#editmessagecaption)
+
+Use this method to edit captions of messages sent by the bot or via the bot (for inline bots).
+
+### Params:
+
+* **options** (*Object*) - Message options:
+  * **chat_id** (*Integer|String*) - Required if `inline_message_id` is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
+  * **message_id** (*Integer*) - Required if `inline_message_id` is not specified. Unique identifier of the sent message.
+  * **inline_message_id** (*Integer*) - Required if `chat_id` and `message_id` are not specified. Identifier of the inline message.
+  * **[caption]** (*String*) - New caption of the message.
+  * **[reply_markup]** - Additional interface options.
+
+## [editMessageReplyMarkup(options)](https://core.telegram.org/bots/api#editmessagereplymarkup)
+
+Use this method to edit only the reply markup of messages sent by the bot or via the bot (for inline bots).
+
+### Params:
+
+* **options** (*Object*) - Message options:
+  * **chat_id** (*Integer|String*) - Required if `inline_message_id` is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
+  * **message_id** (*Integer*) - Required if `inline_message_id` is not specified. Unique identifier of the sent message.
+  * **inline_message_id** (*Integer*) - Required if `chat_id` and `message_id` are not specified. Identifier of the inline message.
+  * **[reply_markup]** - Additional interface options.
+
+# [Inline mode](https://core.telegram.org/bots/api#inline-mode)
+
+The following method allow your bot to work in inline mode.
+
+To enable this option, send the `/setinline` command to [@BotFather](https://telegram.me/botfather) and provide the placeholder text that the user will see in the input field after typing your bot’s name.
+
 ## [answerInlineQuery(inline_query_id, results, [options])](https://core.telegram.org/bots/api#answerinlinequery)
 
 Use this method to send answers to an inline query. On success, True is returned.<br>
@@ -222,6 +376,8 @@ No more than 50 results per query are allowed.
   * **cache_time** (*Integer*) - The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to 300.
   * **is_personal** (*Boolean*) - Pass True, if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.
   * **next_offset** (*String*) - Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don‘t support pagination. Offset length can’t exceed 64 bytes.
+  * **switch_pm_text** (*String*) - If passed, clients will display a button with specified text that switches the user to a private chat with the bot and sends the bot a start message with the parameter `switch_pm_parameter`.
+  * **switch_pm_parameter** (*String*) - Parameter for the start message sent to the bot when user presses the switch button.
 
 # Extra
 
@@ -304,7 +460,7 @@ Custom keyboard.
 
 ### Params:
 
-* **keyboard** (*Array of Array of Strings*) - Array of button rows, each represented by an Array of Strings.
+* **keyboard** (*Array of Array of KeyboardButton*) - Array of button rows, each represented by an Array of [KeyboardButton objects](https://core.telegram.org/bots/api#keyboardbutton).
 * **[resize]** (*Boolean*) - Requests clients to resize the keyboard vertically for optimal fit.
 * **[once]** (*Boolean*) - Requests clients to hide the keyboard as soon as it's been used.
 * **[selective]** (*Boolean*) - Use this parameter if you want to show the keyboard to specific users only.
@@ -330,7 +486,31 @@ api.sendMessage('chatId', 'Text');
 
 ### Params:
 
-* **[selective]** (*Boolean*) - Use this parameter if you want to show the keyboard to specific users only.
+* **[selective]** (*Boolean*) - Use this parameter if you want to hide keyboard for specific users only.
+
+**Note:** This method is chainable.
+
+## forceReply([selective])
+
+Force reply.
+
+### Params:
+
+* **[selective]** (*Boolean*) - Use this parameter if you want to force reply from specific users only.
+
+```js
+api.forceReply().sendMessage('chatId', 'Text');
+```
+
+**Note:** This method is chainable.
+
+## setInlineKeyboard(inlineKeyboard)
+
+Inline keyboard.
+
+### Params:
+
+* **inlineKeyboard** (*Array of Array of InlineKeyboardButton*) - Array of button rows, each represented by an Array of [InlineKeyboardButton objects](https://core.telegram.org/bots/api#inlinekeyboardbutton).
 
 **Note:** This method is chainable.
 
@@ -338,20 +518,20 @@ api.sendMessage('chatId', 'Text');
 
 For `path`, `file_id`, `Buffer` and local `Stream` just pass into variable:
 ```js
-var inputFile = './file.png'; //path
+const inputFile = './file.png'; //path
 //or
-var inputFile = 'AgADAgADjagxGxAR6gbMzfh8LDtkU-9GhCoABOmH973MjLOBq7sAAgI'; //file_id
+const inputFile = 'AgADAgADjagxGxAR6gbMzfh8LDtkU-9GhCoABOmH973MjLOBq7sAAgI'; //file_id
 //or
-var inputFile = new Buffer(); //Buffer
+const inputFile = new Buffer(); //Buffer
 //or
-var inputFile = require('fs').createReadStream('./file.png'); //local Stream
+const inputFile = require('fs').createReadStream('./file.png'); //local Stream
 
 api.sendPhoto('chatId', inputFile);
 ```
 
 For remote `Stream`:
 ```js
-var inputFile = {
+const inputFile = {
   value: require('https').request('https://avatars1.githubusercontent.com/u/2401029'),
   filename: 'image.jpg'
 };

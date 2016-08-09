@@ -57,6 +57,15 @@ Api.prototype.hideKeyboard = function (selective) {
   return this;
 };
 
+Api.prototype.forceReply = function (selective) {
+  this.keyboard = JSON.stringify({
+    force_reply: true,
+    selective: selective || false
+  });
+
+  return this;
+};
+
 Api.prototype.setKeyboard = function (keyboard, resize, once, selective) {
   if (!Array.isArray(keyboard)) {
     return this.hideKeyboard(selective || resize || false);
@@ -68,6 +77,14 @@ Api.prototype.setKeyboard = function (keyboard, resize, once, selective) {
       selective: selective || false
     });
   }
+
+  return this;
+};
+
+Api.prototype.setInlineKeyboard = function (keyboard) {
+  this.keyboard = JSON.stringify({
+    inline_keyboard: keyboard
+  });
 
   return this;
 };
@@ -212,6 +229,28 @@ Api.prototype.sendLocation = function (chatId, lat, lon, options) {
   return yarl.post(this.url + 'sendLocation', { body: options, json: true });
 };
 
+Api.prototype.sendVenue = function (chatId, lat, lon, title, address, options) {
+  options = this._setOptions({
+    chat_id: chatId,
+    latitude: lat,
+    longitude: lon,
+    title: title,
+    address: address
+  }, options);
+
+  return yarl.post(this.url + 'sendVenue', { body: options, json: true });
+};
+
+Api.prototype.sendContact = function (chatId, phoneNumber, firstName, options) {
+  options = this._setOptions({
+    chat_id: chatId,
+    phone_number: phoneNumber,
+    first_name: firstName
+  }, options);
+
+  return yarl.post(this.url + 'sendContact', { body: options, json: true });
+};
+
 Api.prototype.sendChatAction = function (chatId, action) {
   return yarl.post(this.url + 'sendChatAction', { body: {
     chat_id: chatId,
@@ -235,6 +274,79 @@ Api.prototype.downloadFile = function (fileId, path) {
   return this.getFile(fileId).then(function (res) {
     return yarl.download(this.fileUrl + res.body.result.file_path, path);
   }.bind(this));
+};
+
+Api.prototype.kickChatMember = function (chatId, userId) {
+  return yarl.post(this.url + 'kickChatMember', { body: {
+    chat_id: chatId,
+    user_id: userId
+  }, json: true });
+};
+
+Api.prototype.leaveChat = function (chatId) {
+  return yarl.post(this.url + 'leaveChat', { body: {
+    chat_id: chatId
+  }, json: true });
+};
+
+Api.prototype.unbanChatMember = function (chatId, userId) {
+  return yarl.post(this.url + 'unbanChatMember', { body: {
+    chat_id: chatId,
+    user_id: userId
+  }, json: true });
+};
+
+Api.prototype.getChat = function (chatId) {
+  return yarl.get(this.url + 'getChat', { query: {
+    chat_id: chatId
+  }, json: true });
+};
+
+Api.prototype.getChatAdministrators = function (chatId) {
+  return yarl.get(this.url + 'getChatAdministrators', { query: {
+    chat_id: chatId
+  }, json: true });
+};
+
+Api.prototype.getChatMembersCount = function (chatId) {
+  return yarl.get(this.url + 'getChatMembersCount', { query: {
+    chat_id: chatId
+  }, json: true });
+};
+
+Api.prototype.getChatMember = function (chatId, userId) {
+  return yarl.get(this.url + 'getChatMember', { query: {
+    chat_id: chatId,
+    user_id: userId
+  }, json: true });
+};
+
+Api.prototype.answerCallbackQuery = function (callbackQueryId, options) {
+  options = this._setOptions({
+    callback_query_id: callbackQueryId
+  }, options);
+
+  return yarl.post(this.url + 'answerCallbackQuery', { body: options, json: true });
+};
+
+Api.prototype.editMessageText = function (text, options) {
+  options = this._setOptions({
+    text: text
+  }, options);
+
+  return yarl.post(this.url + 'editMessageText', { body: options, json: true });
+};
+
+Api.prototype.editMessageCaption = function (options) {
+  options = this._setOptions({}, options);
+
+  return yarl.post(this.url + 'editMessageCaption', { body: options, json: true });
+};
+
+Api.prototype.editMessageReplyMarkup = function (options) {
+  options = this._setOptions({}, options);
+
+  return yarl.post(this.url + 'editMessageReplyMarkup', { body: options, json: true });
 };
 
 Api.prototype.answerInlineQuery = function (queryId, results, options) {

@@ -45,7 +45,7 @@ describe('tg-yarl()', function () {
 
   describe('.sendMessage()', function () {
     it('should have property ok', function () {
-      return api.sendMessage(chatId, 'From Travis with Love', { disable_notification: true }).then(function (res) {
+      return api.setInlineKeyboard([[{ text: 'Github', url: 'https://github.com/strikeentco' }]]).sendMessage(chatId, 'From Travis with Love', { disable_notification: true }).then(function (res) {
         should(res.body).have.property('ok', true);
       });
     });
@@ -73,7 +73,7 @@ describe('tg-yarl()', function () {
 
   describe('.sendPhoto()', function () {
     it('should have property ok', function () {
-      return api.sendPhoto(chatId, fixture + '/fixture.jpg', { disable_notification: true }).then(function (res) {
+      return api.forceReply().sendPhoto(chatId, fixture + '/fixture.jpg', { disable_notification: true }).then(function (res) {
         should(res.body).have.property('ok', true);
       });
     });
@@ -120,7 +120,7 @@ describe('tg-yarl()', function () {
 
   describe('.sendAudioFromUrl()', function () {
     it('should have property ok', function () {
-      return api.sendAudioFromUrl(chatId, 'https://raw.githubusercontent.com/sindresorhus/file-type/master/fixture/fixture.mp3', { disable_notification: true }).then(function (res) {
+      return api.sendAudioFromUrl(chatId, 'https://raw.githubusercontent.com/strikeentco/tg-yarl/master/test/fixture/fixture.mp3', { disable_notification: true }).then(function (res) {
         should(res.body).have.property('ok', true);
       });
     });
@@ -168,7 +168,7 @@ describe('tg-yarl()', function () {
 
   describe('.sendVideoFromUrl()', function () {
     it('should have property ok', function () {
-      return api.sendVideoFromUrl(chatId, 'https://raw.githubusercontent.com/sindresorhus/file-type/master/fixture/fixture.mp4', { disable_notification: true }).then(function (res) {
+      return api.sendVideoFromUrl(chatId, 'https://raw.githubusercontent.com/strikeentco/tg-yarl/master/test/fixture/fixture.mp4', { disable_notification: true }).then(function (res) {
         should(res.body).have.property('ok', true);
       });
     });
@@ -184,7 +184,7 @@ describe('tg-yarl()', function () {
 
   describe('.sendVoiceFromUrl()', function () {
     it('should have property ok', function () {
-      return api.sendVoiceFromUrl(chatId, 'https://raw.githubusercontent.com/sindresorhus/file-type/master/fixture/fixture.opus', { disable_notification: true }).then(function (res) {
+      return api.sendVoiceFromUrl(chatId, 'https://raw.githubusercontent.com/strikeentco/tg-yarl/master/test/fixture/fixture.opus', { disable_notification: true }).then(function (res) {
         should(res.body).have.property('ok', true);
       });
     });
@@ -193,6 +193,22 @@ describe('tg-yarl()', function () {
   describe('.sendLocation()', function () {
     it('should have property ok', function () {
       return api.sendLocation(chatId, 64.54, 40.53, { disable_notification: true }).then(function (res) {
+        should(res.body).have.property('ok', true);
+      });
+    });
+  });
+
+  describe('.sendVenue()', function () {
+    it('should have property ok', function () {
+      return api.sendVenue(chatId, 64.54, 40.53, 'Title', 'Address', { disable_notification: true }).then(function (res) {
+        should(res.body).have.property('ok', true);
+      });
+    });
+  });
+
+  describe('.sendContact()', function () {
+    it('should have property ok', function () {
+      return api.sendContact(chatId, '+79779999999', 'Anonymous', { disable_notification: true }).then(function (res) {
         should(res.body).have.property('ok', true);
       });
     });
@@ -226,6 +242,100 @@ describe('tg-yarl()', function () {
     it('should be ok', function () {
       return api.downloadFile('AgADAgADjagxGxAR6gbMzfh8LDtkU-9GhCoABOmH973MjLOBq7sAAgI', fixture + '/anonim.jpg').then(function (res) {
         should(res.body).be.eql('The data successfully written to file.');
+      });
+    });
+  });
+
+  describe('.kickChatMember()', function () {
+    it('should throw HTTPError', function () {
+      return api.kickChatMember(chatId, 1).catch(function (e) {
+        should(e.message).be.eql('Response code 400 (Bad Request)');
+      });
+    });
+  });
+
+  describe('.leaveChat()', function () {
+    it('should throw HTTPError', function () {
+      return api.leaveChat(1).catch(function (e) {
+        should(e.message).be.eql('Response code 400 (Bad Request)');
+      });
+    });
+  });
+
+  describe('.unbanChatMember()', function () {
+    it('should throw HTTPError', function () {
+      return api.unbanChatMember(chatId, 1).catch(function (e) {
+        should(e.message).be.eql('Response code 400 (Bad Request)');
+      });
+    });
+  });
+
+  describe('.getChat()', function () {
+    it('should have property ok', function () {
+      return api.getChat(chatId).then(function (res) {
+        should(res.body).have.property('ok', true);
+      });
+    });
+  });
+
+  describe('.getChatAdministrators()', function () {
+    it('should throw HTTPError', function () {
+      return api.getChatAdministrators(chatId).catch(function (e) {
+        should(e.message).be.eql('Response code 400 (Bad Request)');
+      });
+    });
+  });
+
+  describe('.getChatMembersCount()', function () {
+    it('should have property ok', function () {
+      return api.getChatMembersCount(chatId).then(function (res) {
+        should(res.body).have.property('ok', true);
+      });
+    });
+  });
+
+  describe('.getChatMember()', function () {
+    it('should have property ok', function () {
+      return api.getChatMember(chatId, chatId).then(function (res) {
+        should(res.body).have.property('ok', true);
+      });
+    });
+  });
+
+  describe('.answerCallbackQuery()', function () {
+    it('should throw HTTPError', function () {
+      return api.answerCallbackQuery(1).catch(function (e) {
+        should(e.message).be.eql('Response code 400 (Bad Request)');
+      });
+    });
+  });
+
+  describe('.editMessageText()', function () {
+    it('should have property ok', function () {
+      return api.sendMessage(chatId, 'From Travis with Love', { disable_notification: true }).then(function (res) {
+        return api.editMessageText('From Anonymous with Love', { chat_id: chatId, message_id: res.body.result.message_id }).then(function (res) {
+          should(res.body).have.property('ok', true);
+        });
+      });
+    });
+  });
+
+  describe('.editMessageCaption()', function () {
+    it('should have property ok', function () {
+      return api.sendPhoto(chatId, fixture + '/fixture.jpg', { caption: 'Travis', disable_notification: true }).then(function (res) {
+        return api.editMessageCaption({ caption: 'Anonymous', chat_id: chatId, message_id: res.body.result.message_id }).then(function (res) {
+          should(res.body).have.property('ok', true);
+        });
+      });
+    });
+  });
+
+  describe('.editMessageReplyMarkup()', function () {
+    it('should have property ok', function () {
+      return api.setInlineKeyboard([[{ text: 'Github', url: 'https://github.com/strikeentco' }]]).sendMessage(chatId, 'From Travis with Love', { disable_notification: true }).then(function (res) {
+        return api.setInlineKeyboard([[{ text: 'TeaBot', url: 'https://github.com/strikeentco/teabot' }]]).editMessageReplyMarkup({ chat_id: chatId, message_id: res.body.result.message_id }).then(function (res) {
+          should(res.body).have.property('ok', true);
+        });
       });
     });
   });
